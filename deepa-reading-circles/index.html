@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M16 4c3 4 5 6.5 5 9.5a5 5 0 0 1-10 0C11 10.5 13 8 16 4z%27 fill=%27%23e8a427%27/%3E%3Cpath d=%27M6 22h20l-3 6H9z%27 fill=%27%2322362f%27/%3E%3C/svg%3E">
+<title>Deepa Reading Circles</title>
+<meta name="description" content="Deepa Reading Circles runs free evening reading circles for children in Bengaluru's urban settlements.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Caveat:wght@600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a chalkboard-and-paper rhythm. Full-width bands alternate between paper and chalkboard; content sits in a 1120px column with a left-weighted grid. */
+:root{
+  --paper:#f3f5f1;
+  --paper-2:#e6ebe4;
+  --ink:#1d2b26;
+  --ink-soft:#4b5c55;
+  --board:#22362f;
+  --board-2:#2c463d;
+  --chalk:#eef2ec;
+  --chalk-soft:#b7c6bd;
+  --marigold:#e8a427;
+  --marigold-ink:#8a5a06;
+  --line:#cbd5cd;
+  --focus:#e8a427;
+  --f-display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Literata", Georgia, "Times New Roman", serif;
+  --f-hand:"Caveat", "Comic Sans MS", cursive;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --s-1:.875rem; --s0:1.0625rem; --s1:1.25rem; --s2:1.6rem; --s3:2.2rem; --s4:clamp(2.4rem,6vw,4.25rem);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141d1a; --paper-2:#1b2622; --ink:#e6ece7; --ink-soft:#a9b8b0;
+    --board:#0e1613; --board-2:#1a2723; --chalk:#eef2ec; --chalk-soft:#a9b8b0;
+    --marigold:#f0b545; --marigold-ink:#f0b545; --line:#2f3f39; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141d1a; --paper-2:#1b2622; --ink:#e6ece7; --ink-soft:#a9b8b0;
+  --board:#0e1613; --board-2:#1a2723; --chalk:#eef2ec; --chalk-soft:#a9b8b0;
+  --marigold:#f0b545; --marigold-ink:#f0b545; --line:#2f3f39; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:var(--s0);line-height:1.65}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--board)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.1;text-wrap:balance;margin:0}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--marigold-ink)}
+.board .eyebrow,.hero .eyebrow{color:var(--marigold)}
+.hand{font-family:var(--f-hand);font-weight:600}
+
+/* Header */
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--board);color:var(--chalk);border-bottom:1px solid var(--board-2)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:800;font-size:1.15rem;letter-spacing:-.01em}
+.brand svg{flex:none}
+nav.main ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{display:block;text-decoration:none;font-family:var(--f-display);font-weight:500;font-size:.95rem;padding:6px 10px;border-radius:6px;color:var(--chalk-soft)}
+nav.main a:hover{color:var(--chalk);background:var(--board-2)}
+nav.main a.cta{color:#1d2b26;background:var(--marigold);font-weight:700}
+
+/* Hero */
+.hero{background:var(--board);color:var(--chalk);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:48px;padding-block:72px 80px;align-items:center}
+.hero h1{font-size:var(--s4);font-weight:800;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--marigold)}
+.hero .lede{margin-top:20px;font-size:var(--s1);color:var(--chalk-soft);max-width:34ch}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-display);font-weight:700;font-size:1rem;padding:12px 20px;border-radius:8px;text-decoration:none;border:2px solid transparent;cursor:pointer}
+.btn.primary{background:var(--marigold);color:#1d2b26}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn.ghost{border-color:var(--chalk-soft);color:var(--chalk)}
+.btn.ghost:hover{border-color:var(--chalk)}
+.slate{background:var(--board-2);border:10px solid #6b4a2b;border-radius:6px;padding:28px 24px;box-shadow:0 18px 40px rgba(0,0,0,.25);min-width:0}
+.slate .hand{font-size:1.6rem;color:var(--chalk);line-height:1.25}
+.slate ol{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-family:var(--f-hand);font-size:1.45rem;color:var(--chalk-soft)}
+.slate ol li span{color:var(--marigold)}
+.lamp-glow{position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(232,164,39,.28),rgba(232,164,39,0) 65%);pointer-events:none;animation:flicker 6s ease-in-out infinite}
+@keyframes flicker{0%,100%{opacity:1}45%{opacity:.82}55%{opacity:.95}}
+
+/* Generic section */
+section.band{padding-block:88px}
+.band.alt{background:var(--paper-2)}
+.band.board{background:var(--board);color:var(--chalk)}
+.section-head{display:grid;gap:12px;max-width:640px;margin-bottom:44px}
+.section-head h2{font-size:var(--s3);font-weight:800;letter-spacing:-.015em}
+.section-head p{color:var(--ink-soft)}
+.board .section-head p{color:var(--chalk-soft)}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start}
+.about-grid > *{min-width:0}
+.about-copy{display:grid;gap:18px;max-width:62ch}
+.about-copy p:first-child{font-size:var(--s1)}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.fact{background:var(--paper);padding:22px 20px;display:grid;gap:4px}
+.fact b{font-family:var(--f-display);font-size:2rem;font-weight:800;font-variant-numeric:tabular-nums}
+.fact span{font-size:var(--s-1);color:var(--ink-soft);line-height:1.4}
+
+/* Programs */
+.programs{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.program{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:28px 24px;display:grid;grid-template-rows:auto auto 1fr auto;gap:12px;min-width:0}
+.program .tag{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.program h3{font-size:var(--s2);font-weight:700}
+.program p{color:var(--ink-soft);font-size:1rem}
+.program dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:14px}
+.program dt{font-family:var(--f-mono);font-size:.78rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;padding-top:2px}
+.program dd{margin:0}
+
+/* Evening timeline */
+.evening{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:2px solid var(--chalk-soft)}
+.step{padding:20px 18px 0 0;position:relative;min-width:0}
+.step::before{content:"";position:absolute;top:-8px;left:0;width:14px;height:14px;border-radius:50%;background:var(--board);border:2px solid var(--marigold)}
+.step time{display:block;font-family:var(--f-mono);font-size:1rem;color:var(--marigold);font-variant-numeric:tabular-nums}
+.step h3{font-size:1.2rem;font-weight:700;margin-top:6px}
+.step p{font-size:.95rem;color:var(--chalk-soft);margin-top:6px}
+
+/* Impact ladder */
+.impact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:start}
+.impact-grid > *{min-width:0}
+.ladder{display:grid;gap:18px}
+.rung{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:center}
+.rung .label{font-family:var(--f-display);font-weight:700}
+.rung .label small{display:block;font-family:var(--f-body);font-weight:400;font-size:.8rem;color:var(--ink-soft)}
+.bars{display:grid;gap:5px}
+.bar{display:grid;grid-template-columns:1fr 48px;gap:10px;align-items:center}
+.bar .track{height:14px;background:var(--paper);border-radius:3px;overflow:hidden;border:1px solid var(--line)}
+.bar .fill{height:100%}
+.bar.before .fill{background:var(--ink-soft);opacity:.55}
+.bar.after .fill{background:var(--marigold)}
+.bar output{font-family:var(--f-mono);font-size:.82rem;text-align:right;font-variant-numeric:tabular-nums}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:.85rem;color:var(--ink-soft);margin-top:4px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:6px}
+.quote{border-left:4px solid var(--marigold);padding:4px 0 4px 20px;display:grid;gap:10px}
+.quote p{font-size:var(--s1);font-style:italic}
+.quote cite{font-style:normal;font-family:var(--f-mono);font-size:.8rem;color:var(--ink-soft)}
+.note{font-size:.85rem;color:var(--ink-soft);margin-top:20px}
+
+/* Get involved */
+.involve{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.way{padding:28px 0 0;border-top:3px solid var(--ink);display:grid;gap:10px;align-content:start;min-width:0}
+.way h3{font-size:var(--s2);font-weight:700}
+.way p{color:var(--ink-soft)}
+.way ul{margin:4px 0 0;padding-left:18px;display:grid;gap:4px;font-size:.95rem}
+.way .amount{font-family:var(--f-mono);font-size:.9rem;background:var(--paper-2);padding:10px 12px;border-radius:6px;display:grid;gap:4px}
+.band.alt .way .amount{background:var(--paper)}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:start}
+.contact-grid > *{min-width:0}
+.details{display:grid;gap:22px}
+.details div{display:grid;gap:2px}
+.details dt{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--chalk-soft)}
+.details dd{margin:0;font-size:1.05rem;user-select:all}
+form.contact{display:grid;gap:16px;background:var(--board-2);padding:28px;border-radius:10px}
+.field{display:grid;gap:6px}
+.field label{font-family:var(--f-display);font-weight:500;font-size:.95rem}
+.field input,.field select,.field textarea{font:inherit;font-size:1rem;padding:11px 12px;border-radius:6px;border:1px solid #3d574d;background:var(--board);color:var(--chalk);width:100%}
+.field textarea{min-height:110px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-status{font-size:.95rem;color:var(--marigold);min-height:1.4em}
+
+footer.site{background:var(--board);color:var(--chalk-soft);border-top:1px solid var(--board-2)}
+footer.site .wrap{padding-block:32px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.88rem}
+footer.site p{max-width:60ch}
+
+@media (max-width:900px){
+  .hero .wrap,.about-grid,.impact-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .programs,.involve{grid-template-columns:1fr}
+  .evening{grid-template-columns:1fr;border-top:0;border-left:2px solid var(--chalk-soft);gap:24px;padding-left:22px}
+  .step{padding:0}
+  .step::before{top:4px;left:-31px}
+  section.band{padding-block:64px}
+}
+@media (max-width:520px){
+  .row2{grid-template-columns:1fr}
+  .rung{grid-template-columns:1fr;gap:6px}
+  nav.main{width:100%}
+  nav.main a{padding:6px 8px;font-size:.9rem}
+  .hero .wrap{padding-block:48px 56px}
+}
+body{margin:0}
+img{max-width:100%}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="Deepa Reading Circles home">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c3 4 5 6.5 5 9.5a5 5 0 0 1-10 0C11 10.5 13 8 16 4z" fill="#e8a427"/><path d="M6 22h20l-3 6H9z" fill="#b7c6bd"/><rect x="14" y="18" width="4" height="4" fill="#b7c6bd"/></svg>
+      Deepa Reading Circles
+    </a>
+    <nav class="main" aria-label="Main">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#involved">Get involved</a></li>
+        <li><a class="cta" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <div class="lamp-glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Free evening reading circles · Bengaluru</p>
+        <h1 style="margin-top:14px">At 6 pm the lamp comes on, and <em>thirty children</em> open a book.</h1>
+        <p class="lede">We run small reading circles inside urban settlements, in Kannada and English, so that every child in Classes 1 to 5 can read a story on their own.</p>
+        <div class="actions">
+          <a class="btn primary" href="#involved">Volunteer an evening</a>
+          <a class="btn ghost" href="#programs">See our programs</a>
+        </div>
+      </div>
+      <div class="slate" aria-label="Tonight's circle on the slate">
+        <p class="hand">Tonight at Lakshmi Nagar circle</p>
+        <ol>
+          <li><span>6:00</span> lamp on, roll call</li>
+          <li><span>6:15</span> sound games: ಅ ಆ ಇ / a b c</li>
+          <li><span>6:40</span> pair reading</li>
+          <li><span>7:10</span> story aloud: "The Clever Crow"</li>
+          <li><span>7:30</span> books go home</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">About us</p>
+        <h2>A reading circle within ten minutes' walk of every child.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>Deepa started in 2019 as one volunteer, one solar lamp and a box of donated picture books on a doorstep in Lakshmi Nagar.</p>
+          <p>Many children in the settlements we work in are enrolled in school but still cannot read a short paragraph by Class 5. Their homes are small, evenings are noisy, and there is often no one free to sit with them and a book. A reading circle gives them a quiet hour, a trained mentor and a lending shelf.</p>
+          <p>Each circle has no more than 30 children and one mentor for every eight. Mentors are young people from the same neighbourhood, paid a monthly stipend and trained by us every Saturday. College volunteers join on weekends.</p>
+          <p class="hand" style="font-size:1.6rem;color:var(--marigold-ink)">Read with them, not to them.</p>
+        </div>
+        <div class="facts" role="list">
+          <div class="fact" role="listitem"><b>24</b><span>reading circles across 9 settlements</span></div>
+          <div class="fact" role="listitem"><b>640</b><span>children reading with us this year</span></div>
+          <div class="fact" role="listitem"><b>82</b><span>neighbourhood mentors on stipend</span></div>
+          <div class="fact" role="listitem"><b>5,300</b><span>books on our lending shelves</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="programs">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Programs</p>
+        <h2>Three programs, one goal: a child who reads for pleasure.</h2>
+        <p>Every program is free for families. We run them in community halls, temple courtyards and anganwadi rooms that neighbours lend us after hours.</p>
+      </div>
+      <div class="programs">
+        <article class="program">
+          <p class="tag">Core program</p>
+          <h3>Evening Circles</h3>
+          <p>A 90-minute session five evenings a week. Children are grouped by reading level, not by age, and move up as they progress.</p>
+          <dl><dt>Who</dt><dd>Classes 1 to 5</dd><dt>When</dt><dd>Mon to Fri, 6:00 to 7:30 pm</dd><dt>Size</dt><dd>Up to 30 per circle</dd></dl>
+        </article>
+        <article class="program">
+          <p class="tag">Library</p>
+          <h3>Book Bags</h3>
+          <p>Each child takes home a cloth bag with two levelled books every Friday and swaps them the next week. Parents get a picture card on how to read along.</p>
+          <dl><dt>Who</dt><dd>Every circle member</dd><dt>When</dt><dd>Weekly swap, Fridays</dd><dt>Books</dt><dd>Kannada, English, bilingual</dd></dl>
+        </article>
+        <article class="program">
+          <p class="tag">Training</p>
+          <h3>Mentor School</h3>
+          <p>A 12-week course for young people aged 17 to 24 from the settlements. It covers phonics, read-alouds, and running a calm circle.</p>
+          <dl><dt>Who</dt><dd>Neighbourhood youth</dd><dt>When</dt><dd>Saturdays, 10 am to 1 pm</dd><dt>Stipend</dt><dd>Paid during and after</dd></dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band board" id="evening">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How a circle works</p>
+        <h2>One evening, start to finish.</h2>
+        <p>Every circle follows the same 90-minute routine, so children know what comes next and mentors can run it without notes.</p>
+      </div>
+      <ol class="evening" style="list-style:none;margin:0;padding-left:0">
+        <li class="step"><time>6:00</time><h3>Lamp on</h3><p>Roll call, water, and five minutes to settle down.</p></li>
+        <li class="step"><time>6:15</time><h3>Sound games</h3><p>Letters and sounds through clapping and chalk games.</p></li>
+        <li class="step"><time>6:40</time><h3>Pair reading</h3><p>An older reader and a newer one share a levelled book.</p></li>
+        <li class="step"><time>7:10</time><h3>Story aloud</h3><p>The mentor reads, stops, and asks what happens next.</p></li>
+        <li class="step"><time>7:30</time><h3>Books home</h3><p>Book bags are checked out and the lamp goes off.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="impact">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Impact</p>
+        <h2>We measure every child on the reading ladder, twice a year.</h2>
+        <p>The ladder has four rungs: letters, words, a short paragraph, and a full story. We test in June when children join and again in March.</p>
+      </div>
+      <div class="impact-grid">
+        <div>
+          <div class="ladder" aria-label="Share of children at each reading level, June 2025 and March 2026">
+            <div class="rung"><div class="label">Story<small>reads 10+ sentences</small></div>
+              <div class="bars"><div class="bar before"><div class="track"><div class="fill" style="width:11%"></div></div><output>11%</output></div><div class="bar after"><div class="track"><div class="fill" style="width:38%"></div></div><output>38%</output></div></div></div>
+            <div class="rung"><div class="label">Paragraph<small>reads 4 sentences</small></div>
+              <div class="bars"><div class="bar before"><div class="track"><div class="fill" style="width:19%"></div></div><output>19%</output></div><div class="bar after"><div class="track"><div class="fill" style="width:31%"></div></div><output>31%</output></div></div></div>
+            <div class="rung"><div class="label">Word<small>reads simple words</small></div>
+              <div class="bars"><div class="bar before"><div class="track"><div class="fill" style="width:33%"></div></div><output>33%</output></div><div class="bar after"><div class="track"><div class="fill" style="width:22%"></div></div><output>22%</output></div></div></div>
+            <div class="rung"><div class="label">Letter<small>knows letters only</small></div>
+              <div class="bars"><div class="bar before"><div class="track"><div class="fill" style="width:37%"></div></div><output>37%</output></div><div class="bar after"><div class="track"><div class="fill" style="width:9%"></div></div><output>9%</output></div></div></div>
+          </div>
+          <div class="legend"><span><i style="background:var(--ink-soft);opacity:.55"></i>June 2025 (joining)</span><span><i style="background:var(--marigold)"></i>March 2026</span></div>
+        </div>
+        <div style="display:grid;gap:28px">
+          <blockquote class="quote" style="margin:0">
+            <p>Last year Meena only knew her letters. Now she reads the bus boards to me on the way to the market.</p>
+            <cite>A parent at the Ejipura circle</cite>
+          </blockquote>
+          <blockquote class="quote" style="margin:0">
+            <p>I joined as a mentor because nobody did this for me. Now eight children wait for me at six every evening.</p>
+            <cite>Ravi, mentor since 2022</cite>
+          </blockquote>
+          <p class="note">Figures are the share of 512 children tested at both points in the 2025–26 cycle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="involved">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Get involved</p>
+        <h2>Give an evening, a book, or a lamp.</h2>
+      </div>
+      <div class="involve">
+        <div class="way">
+          <h3>Volunteer</h3>
+          <p>Join a circle on Saturday or Sunday evenings for at least three months.</p>
+          <ul><li>Lead a story aloud</li><li>Run sound games</li><li>Help sort and level books</li></ul>
+        </div>
+        <div class="way">
+          <h3>Donate</h3>
+          <p>Your gift goes straight to circles, mentors and books.</p>
+          <div class="amount"><span>₹500 · one book bag for a year</span><span>₹2,500 · a solar lamp for a circle</span><span>₹6,000 · a mentor's stipend for a month</span></div>
+        </div>
+        <div class="way">
+          <h3>Partner</h3>
+          <p>Schools, publishers and companies can sponsor a circle or donate books in Kannada and English.</p>
+          <ul><li>Sponsor a circle for a year</li><li>Run a book drive at work</li><li>Offer a space for a new circle</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band board" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="section-head" style="margin-bottom:28px">
+          <p class="eyebrow">Contact</p>
+          <h2>Start a circle near you.</h2>
+          <p>Tell us where you are and how you'd like to help. We reply within three working days.</p>
+        </div>
+        <dl class="details">
+          <div><dt>Office</dt><dd>2nd Floor, 14 Hosur Road Cross, Koramangala, Bengaluru 560034</dd></div>
+          <div><dt>Email</dt><dd>hello@deepacircles.example</dd></div>
+          <div><dt>Circle hours</dt><dd>Mon to Fri, 6:00 to 7:30 pm</dd></div>
+        </dl>
+      </div>
+      <form class="contact" id="contact-form" novalidate>
+        <div class="row2">
+          <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" required autocomplete="name"></div>
+          <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
+        </div>
+        <div class="field"><label for="c-interest">I'd like to</label>
+          <select id="c-interest" name="interest"><option>Volunteer at a circle</option><option>Donate</option><option>Partner with Deepa</option><option>Start a circle in my area</option></select></div>
+        <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="message" placeholder="Which area of Bengaluru are you in?"></textarea></div>
+        <button class="btn primary" type="submit" style="justify-self:start">Send message</button>
+        <p class="form-status" id="form-status" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>© 2026 Deepa Reading Circles. Concept website created for a web development internship task; Deepa Reading Circles is a fictional organization and all figures are illustrative.</p>
+    <p><a href="#home">Back to top</a></p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var status = document.getElementById('form-status');
+  var name = document.getElementById('c-name').value.trim();
+  var email = document.getElementById('c-email').value.trim();
+  if (!name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    status.textContent = 'Add your name and a valid email address so we can reply.';
+    return;
+  }
+  status.textContent = 'Thanks, ' + name + '. This is a demo site, so your message was not sent anywhere.';
+  this.reset();
+});
+</script>
+</body>
+</html>
